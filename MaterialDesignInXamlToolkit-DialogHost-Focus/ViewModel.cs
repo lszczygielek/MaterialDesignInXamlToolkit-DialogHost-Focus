@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace MaterialDesignInXamlToolkit_DialogHost_Focus
 {
     public class ViewModel : INotifyPropertyChanged
     {
-        private string lastInput;// = "Default";
-
-        public ViewModel()
-        {
-            LastInput = "Default";
-        }
+        private string lastInput;
 
         public string LastInput 
         { 
@@ -25,6 +17,7 @@ namespace MaterialDesignInXamlToolkit_DialogHost_Focus
                 OnPropertyChanged();
             }
         }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)

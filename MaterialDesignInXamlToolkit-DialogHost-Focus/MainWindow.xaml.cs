@@ -1,18 +1,5 @@
 ﻿using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace MaterialDesignInXamlToolkit_DialogHost_Focus
 {
@@ -21,24 +8,25 @@ namespace MaterialDesignInXamlToolkit_DialogHost_Focus
     /// </summary>
     public partial class MainWindow : Window
     {
-        private ViewModel viewModel;
+        private ViewModel updateSourceTriggerOnPropertyChangedViewModel;
+        private ViewModel updateSourceTriggerOnLostFocusViewModel;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            viewModel = new ViewModel();
-            DataContext = viewModel;
+            updateSourceTriggerOnLostFocusViewModel = new ViewModel();
+            OnLostFocusExample.DataContext = updateSourceTriggerOnLostFocusViewModel;
+
+            updateSourceTriggerOnPropertyChangedViewModel = new ViewModel();
+            OnPropertyChangedExample.DataContext = updateSourceTriggerOnPropertyChangedViewModel;
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private async void OnLostFocusExampleButton_Click(object sender, RoutedEventArgs e)
         {
-            // await DialogHost.Show(string.Empty);
-            var abc = new ViewModel { LastInput = viewModel.LastInput };
-
             var result = await DialogHost.Show(
-                //new ViewModel { LastInput = viewModel.LastInput },
-                abc,
+                new ViewModel { LastInput = updateSourceTriggerOnLostFocusViewModel.LastInput },
+                "OnLostFocusExample",
                 (object sender, DialogClosingEventArgs args) =>
                 {
                     if (args.Parameter is bool isConfirmed && !isConfirmed)
@@ -48,7 +36,26 @@ namespace MaterialDesignInXamlToolkit_DialogHost_Focus
                     }
                     else
                     {
-                        viewModel.LastInput = ((ViewModel)args.Session.Content).LastInput;
+                        updateSourceTriggerOnLostFocusViewModel.LastInput = ((ViewModel)args.Session.Content).LastInput;
+                    }
+                });
+        }
+
+        private async void OnPropertyChangedExampleButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = await DialogHost.Show(
+                new ViewModel { LastInput = updateSourceTriggerOnPropertyChangedViewModel.LastInput },
+                "OnPropertyChangedExample",
+                (object sender, DialogClosingEventArgs args) =>
+                {
+                    if (args.Parameter is bool isConfirmed && !isConfirmed)
+                    {
+                        return;
+
+                    }
+                    else
+                    {
+                        updateSourceTriggerOnPropertyChangedViewModel.LastInput = ((ViewModel)args.Session.Content).LastInput;
                     }
                 });
         }

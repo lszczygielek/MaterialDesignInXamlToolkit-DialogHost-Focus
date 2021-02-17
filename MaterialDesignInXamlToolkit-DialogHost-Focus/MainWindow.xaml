@@ -13,56 +13,110 @@
         TextElement.FontSize="14"
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         Title="MainWindow" Height="450" Width="800">
-    <materialDesign:DialogHost>
-        <materialDesign:DialogHost.DialogContentTemplate>
-            <DataTemplate DataType="{x:Type local:ViewModel}">
-                <StackPanel>
-                    <!--<TextBox Margin="5"
-                             Text="{Binding LastInput}"
-                             />-->
-                    <!--Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"-->
-                    <TextBox Margin="5"
-                             
-                             Text="{Binding LastInput, UpdateSourceTrigger=PropertyChanged}"
-                             />
-                    <Button Margin="1"
-                            IsCancel="True"
-                            Content="Cancel"
-                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                        <Button.CommandParameter>
-                            <system:Boolean>False</system:Boolean>
-                        </Button.CommandParameter>
-                    </Button>
-                    <Button Margin="1"
-                            IsDefault="True"
-                            Content="OK"
-                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
-                        <Button.CommandParameter>
-                            <system:Boolean>True</system:Boolean>
-                        </Button.CommandParameter>
-                    </Button>
-                </StackPanel>
-            </DataTemplate>
-        </materialDesign:DialogHost.DialogContentTemplate>
-        
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-            <DockPanel>
-                <TextBlock Margin="0,0,10,0"
-                           Style="{StaticResource MaterialDesignTextBlock}">User input is:</TextBlock>
-                <TextBlock Text="{Binding LastInput}"
-                           Style="{StaticResource MaterialDesignTextBlock}"/>
-            </DockPanel>
+        <materialDesign:DialogHost Name="OnLostFocusExample"
+                                   Grid.Column="0"
+                                   Margin="3"
+                                   Identifier="OnLostFocusExample">
+            <materialDesign:DialogHost.DialogContentTemplate>
+                <DataTemplate DataType="{x:Type local:ViewModel}">
+                    <StackPanel>
+                        <TextBox Margin="5"
+                                 Text="{Binding LastInput}"/>
+                        <Button Margin="1"
+                                IsCancel="True"
+                                Content="Cancel"
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                            <Button.CommandParameter>
+                                <system:Boolean>False</system:Boolean>
+                            </Button.CommandParameter>
+                        </Button>
+                        <Button Margin="1"
+                                IsDefault="True"
+                                Content="OK"
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                            <Button.CommandParameter>
+                                <system:Boolean>True</system:Boolean>
+                            </Button.CommandParameter>
+                        </Button>
+                    </StackPanel>
+                </DataTemplate>
+            </materialDesign:DialogHost.DialogContentTemplate>
 
-            <Button Grid.Row="1"
-                    Click="Button_Click">Change user input</Button>
-        </Grid>
-    </materialDesign:DialogHost>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <DockPanel>
+                    <TextBlock Margin="0,0,10,0"
+                               Style="{StaticResource MaterialDesignTextBlock}">OnLostFocusExample - User input is:</TextBlock>
+                    <TextBlock Text="{Binding LastInput}"
+                               Style="{StaticResource MaterialDesignTextBlock}"/>
+                </DockPanel>
+
+                <Button Grid.Row="1"
+                        Click="OnLostFocusExampleButton_Click">Change user input</Button>
+            </Grid>
+        </materialDesign:DialogHost>
+
+        <materialDesign:DialogHost Name="OnPropertyChangedExample"
+                                   Grid.Column="1"
+                                   Margin="3"
+                                   Identifier="OnPropertyChangedExample">
+            <materialDesign:DialogHost.DialogContentTemplate>
+                <DataTemplate DataType="{x:Type local:ViewModel}">
+                    <StackPanel>
+                        <TextBox Margin="5"
+                                 Text="{Binding LastInput, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Button Margin="1"
+                                IsCancel="True"
+                                Content="Cancel"
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                            <Button.CommandParameter>
+                                <system:Boolean>False</system:Boolean>
+                            </Button.CommandParameter>
+                        </Button>
+                        <Button Margin="1"
+                                IsDefault="True"
+                                Content="OK"
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                            <Button.CommandParameter>
+                                <system:Boolean>True</system:Boolean>
+                            </Button.CommandParameter>
+                        </Button>
+                    </StackPanel>
+                </DataTemplate>
+            </materialDesign:DialogHost.DialogContentTemplate>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <DockPanel>
+                    <TextBlock Margin="0,0,10,0"
+                               Style="{StaticResource MaterialDesignTextBlock}">OnPropertyChangedExample - User input is:</TextBlock>
+                    <TextBlock Text="{Binding LastInput}"
+                               Style="{StaticResource MaterialDesignTextBlock}"/>
+                </DockPanel>
+
+                <Button Grid.Row="1"
+                        Click="OnPropertyChangedExampleButton_Click">Change user input</Button>
+            </Grid>
+        </materialDesign:DialogHost>
+    </Grid>
 </Window>
