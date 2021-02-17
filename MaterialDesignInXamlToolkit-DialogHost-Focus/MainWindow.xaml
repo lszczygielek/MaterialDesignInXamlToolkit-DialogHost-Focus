@@ -15,40 +15,34 @@
         Title="MainWindow" Height="450" Width="800">
     <materialDesign:DialogHost>
         <materialDesign:DialogHost.DialogContentTemplate>
-            <DataTemplate>
-                <DataTemplate.Resources>
-                    <DataTemplate DataType="{x:Type local:ViewModel}">
-                        <Grid Margin="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="10" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.ColumnSpan="3" Margin="0,0,0,5">
-                                <!--<TextBlock Text="Username" />-->
-                                <TextBox Text="{Binding LastInput}" />
-                                <!--<TextBlock Text="Password" />
-                                <TextBox Text="{Binding Password}" />-->
-                            </StackPanel>
-
-                            <Button Content="_Login" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Grid.Row="1" Grid.Column="2">
-                                <Button.CommandParameter>
-                                    <system:Boolean>True</system:Boolean>
-                                </Button.CommandParameter>
-                            </Button>
-                            <Button Content="_Cancel" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Grid.Row="1" Grid.Column="0" />
-                        </Grid>
-                    </DataTemplate>
-                </DataTemplate.Resources>
-
-                <ContentControl Content="{Binding}" />
+            <DataTemplate DataType="{x:Type local:ViewModel}">
+                <StackPanel>
+                    <!--<TextBox Margin="5"
+                             Text="{Binding LastInput}"
+                             />-->
+                    <!--Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"-->
+                    <TextBox Margin="5"
+                             
+                             Text="{Binding LastInput, UpdateSourceTrigger=PropertyChanged}"
+                             />
+                    <Button Margin="1"
+                            IsCancel="True"
+                            Content="Cancel"
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                        <Button.CommandParameter>
+                            <system:Boolean>False</system:Boolean>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button Margin="1"
+                            IsDefault="True"
+                            Content="OK"
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                        <Button.CommandParameter>
+                            <system:Boolean>True</system:Boolean>
+                        </Button.CommandParameter>
+                    </Button>
+                </StackPanel>
             </DataTemplate>
-            
         </materialDesign:DialogHost.DialogContentTemplate>
         
         <Grid>
